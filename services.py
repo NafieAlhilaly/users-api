@@ -92,7 +92,7 @@ async def create_user(name: str, email: str, password: str, db: orm.Session) -> 
     :return: new user
     """
 
-    user_obj = models.User(name=name, email=email, hashed_password=_hash.bcrypt.hash(password))
+    user_obj = models.User(background_tasks : BackgroundTasks ,name=name, email=email, hashed_password=_hash.bcrypt.hash(password))
     db.add(user_obj)
     db.commit()
     db.refresh(user_obj)
