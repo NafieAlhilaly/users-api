@@ -1,7 +1,7 @@
 import datetime
 import sqlalchemy as sql
 import passlib.hash as hash
-import db
+from app import db
 
 
 class User(db.Base):

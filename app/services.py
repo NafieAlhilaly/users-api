@@ -1,7 +1,7 @@
 import os
 import jwt
-import db
-import models
+from app import db
+from app import models
 import fastapi
 from dotenv import load_dotenv
 import sqlalchemy.orm as orm
@@ -103,9 +103,9 @@ async def create_user(
     db.add(user_obj)
     db.commit()
     db.refresh(user_obj)
-    
+
     send_email(
-        background_tasks, 
+        background_tasks,
         'Hello World', 'someemail@gmail.com',
         {'title': 'Hello World', 'name': name})
 
