@@ -79,7 +79,7 @@ async def get_user_by_email(email: str, db: orm.Session):
     return db.query(models.User).filter(models.User.email == email).first()
 
 
-async def create_user(name: str, email: str, password: str, db: orm.Session) -> models.User:
+async def create_user(background_tasks: BackgroundTasks, name: str, email: str, password: str, db: orm.Session) -> models.User:
     """
     create a new user with the form data received
 
