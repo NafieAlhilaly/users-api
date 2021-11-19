@@ -18,11 +18,11 @@ JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 
 # mail config
 MAIL_USERNAME = os.getenv('MAIL_USERNAME')
-    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
-    MAIL_FROM = os.getenv('MAIL_FROM')
-    MAIL_PORT = int(os.getenv('MAIL_PORT'))
-    MAIL_SERVER = os.getenv('MAIL_SERVER')
-    MAIL_FROM_NAME = os.getenv('MAIN_FROM_NAME')
+MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+MAIL_FROM = os.getenv('MAIL_FROM')
+MAIL_PORT = int(os.getenv('MAIL_PORT'))
+MAIL_SERVER = os.getenv('MAIL_SERVER')
+MAIL_FROM_NAME = os.getenv('MAIN_FROM_NAME')
 
 conf = ConnectionConfig(
     MAIL_USERNAME=MAIL_USERNAME,
@@ -85,13 +85,13 @@ async def create_user(name: str, email: str, password: str, db: orm.Session) -> 
 
     :param name: user name
     :param email: user email
-    :param password: user passwrd
+    :param password: user password
     :param db: database session object
 
     :return: new user
     """
 
-    user_obj = models.User(background_tasks : BackgroundTasks ,name=name, email=email, hashed_password=_hash.bcrypt.hash(password))
+    user_obj = models.User(name=name, email=email, hashed_password=_hash.bcrypt.hash(password))
     db.add(user_obj)
     db.commit()
     db.refresh(user_obj)
