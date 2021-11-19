@@ -37,6 +37,7 @@ conf = ConnectionConfig(
     TEMPLATE_FOLDER='./templates'
 )
 
+
 def send_email(background_tasks: BackgroundTasks, subject: str, email_to: str, body: dict):
     """
     create a background task to send email to new user/users
@@ -50,6 +51,7 @@ def send_email(background_tasks: BackgroundTasks, subject: str, email_to: str, b
     fm = FastMail(conf)
     background_tasks.add_task(
        fm.send_message, message, template_name='email.html')
+
 
 def create_database():
     """
@@ -79,10 +81,16 @@ async def get_user_by_email(email: str, db: orm.Session):
     return db.query(models.User).filter(models.User.email == email).first()
 
 
-async def create_user(background_tasks: BackgroundTasks, name: str, email: str, password: str, db: orm.Session) -> models.User:
+async def create_user(
+        background_tasks: BackgroundTasks,
+        name: str,
+        email: str,
+        password: str,
+        db: orm.Session) -> models.User:
     """
     create a new user with the form data received
 
+    :param background_tasks: background task obj
     :param name: user name
     :param email: user email
     :param password: user password
@@ -98,8 +106,8 @@ async def create_user(background_tasks: BackgroundTasks, name: str, email: str, 
     
     send_email(
         background_tasks, 
-        'Hello World','someemail@gmail.com', 
-        {'title': 'Hello World', 'name':name})
+        'Hello World', 'someemail@gmail.com',
+        {'title': 'Hello World', 'name': name})
 
     return user_obj
 
