@@ -53,9 +53,8 @@ def send_email(background_tasks: BackgroundTasks, subject: str, email_to: str, b
 
 def create_database():
     """
-    create database if not exists, default will create sqlite
-    database(database.db) in the root directory
-    :return: None
+    create database if not exists
+    
     """
     return db.Base.metadata.create_all(bind=db.engine)
 
