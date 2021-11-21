@@ -2,10 +2,13 @@ import fastapi
 from fastapi import FastAPI, Form
 import fastapi.security as security
 import sqlalchemy.orm as orm
-import services
+from app import services
 
 app = FastAPI()
 
+@app.get("/")
+async def main_root():
+    return {"message": "working"}
 
 @app.post("/api/users")
 async def create_user(
