@@ -16,7 +16,8 @@ load_dotenv()
 oauth2schema = security.OAuth2PasswordBearer(tokenUrl="/api/token")
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 
-# mail config
+# mail config (uncomment)
+"""
 MAIL_USERNAME = os.getenv('MAIL_USERNAME')
 MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
 MAIL_FROM = os.getenv('MAIL_FROM')
@@ -36,6 +37,7 @@ conf = ConnectionConfig(
     USE_CREDENTIALS=True,
     TEMPLATE_FOLDER='./templates'
 )
+"""
 
 
 def send_email(background_tasks: BackgroundTasks, subject: str, email_to: str, body: dict):
@@ -103,12 +105,12 @@ async def create_user(
     db.add(user_obj)
     db.commit()
     db.refresh(user_obj)
-
+    """
     send_email(
         background_tasks,
         'Hello World', 'someemail@gmail.com',
         {'title': 'Hello World', 'name': name})
-
+    """
     return user_obj
 
 
