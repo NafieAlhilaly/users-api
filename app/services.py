@@ -39,21 +39,22 @@ conf = ConnectionConfig(
 )
 """
 
-
+"""
 def send_email(background_tasks: BackgroundTasks, subject: str, email_to: str, body: dict):
-    """
+
     create a background task to send email to new user/users
-    """
+
     message = MessageSchema(
         subject=subject,
         recipients=[email_to],
         body=body,
         subtype='html',
     )
+    
     fm = FastMail(conf)
     background_tasks.add_task(
        fm.send_message, message, template_name='email.html')
-
+"""
 
 def create_database():
     """
